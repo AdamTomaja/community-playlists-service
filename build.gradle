@@ -56,4 +56,12 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
+
+    groovy {
+        greclipse()                 // formatter dla Groovy
+        importOrder()               // porządkuje importy (domyślnie alfabetycznie)
+        indentWithSpaces(4)         // spójne wcięcia jak w Java sekcji
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }

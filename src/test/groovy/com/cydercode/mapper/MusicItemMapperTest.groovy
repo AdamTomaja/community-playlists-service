@@ -16,7 +16,7 @@ class MusicItemMapperTest extends Specification {
 
         then:
         mapped.id == 1L
-        mapped.itemType == MusicItemType.SOUNDCLOUD_SET
+        mapped.itemType == MusicItemType.SOUNDCLOUD_PLAYLIST
         mapped.externalID == "ext-id"
         mapped.link == "https://mylink.com"
         mapped.userID == "usr-id"
@@ -25,7 +25,10 @@ class MusicItemMapperTest extends Specification {
     def "should map list of MusicItems to list of CreateMusicItemResponse"() {
         given:
         def mapper = new MusicItemMapper()
-        def items = [createMusicItem(1L), createMusicItem(2L)]
+        def items = [
+            createMusicItem(1L),
+            createMusicItem(2L)
+        ]
 
         when:
         def mapped = mapper.toResponse(items)
@@ -39,7 +42,7 @@ class MusicItemMapperTest extends Specification {
     private MusicItem createMusicItem(long id) {
         def musicItem = MusicItem.builder()
                 .id(id)
-                .itemType(MusicItemType.SOUNDCLOUD_SET)
+                .itemType(MusicItemType.SOUNDCLOUD_PLAYLIST)
                 .externalId("ext-id")
                 .link("https://mylink.com")
                 .userId("usr-id")

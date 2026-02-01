@@ -19,18 +19,18 @@ class MusicItemsServiceTest extends Specification {
             return item
         }
 
-        typeResolverService.resolve("the-link") >> MusicItemType.SOUNDCLOUD_SET
-        externalIdResolverService.resolveExternalID("the-link", MusicItemType.SOUNDCLOUD_SET) >> "ext-id"
+        typeResolverService.resolve("the-link") >> MusicItemType.SOUNDCLOUD_PLAYLIST
+        externalIdResolverService.resolveExternalID("the-link", MusicItemType.SOUNDCLOUD_PLAYLIST) >> Optional.of("ext-id")
 
         @Subject
-        def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
+                def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
 
         when:
         def item = service.createItem("usr-id", "the-link")
 
         then:
         item.id == 1L
-        item.itemType == MusicItemType.SOUNDCLOUD_SET
+        item.itemType == MusicItemType.SOUNDCLOUD_PLAYLIST
         item.externalId == "ext-id"
     }
 }

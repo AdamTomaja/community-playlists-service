@@ -36,5 +36,4 @@ class ExternalIDResolverServiceTest extends Specification {
         expect:
         new ExternalIDResolverService().resolveExternalID("https://asdasd", MusicItemType.UNKNOWN).isEmpty()
     }
-
 }

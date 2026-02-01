@@ -26,11 +26,13 @@ class MusicItemsServiceTest extends Specification {
                 def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
 
         when:
-        def item = service.createItem("usr-id", "the-link")
+        def item = service.createItem("usr-id", "usrname", "the-link")
 
         then:
         item.id == 1L
         item.itemType == MusicItemType.SOUNDCLOUD_PLAYLIST
         item.externalId == "ext-id"
+        item.userId == "usr-id"
+        item.username == "usrname"
     }
 }

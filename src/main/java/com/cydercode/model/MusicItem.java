@@ -28,6 +28,7 @@ public class MusicItem {
   private Long id;
 
   private String userId;
+  private String username;
   private String link;
   private String externalId;
 

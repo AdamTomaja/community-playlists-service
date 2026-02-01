@@ -10,6 +10,7 @@ public class CreateMusicItemResponse {
 
   private long id;
   private String userID;
+  private String username;
   private MusicItemType itemType;
   private String link;
   private String externalID;

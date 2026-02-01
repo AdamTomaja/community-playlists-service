@@ -20,6 +20,7 @@ class MusicItemMapperTest extends Specification {
         mapped.externalID == "ext-id"
         mapped.link == "https://mylink.com"
         mapped.userID == "usr-id"
+        mapped.username == "usrname"
     }
 
     def "should map list of MusicItems to list of CreateMusicItemResponse"() {
@@ -46,6 +47,7 @@ class MusicItemMapperTest extends Specification {
                 .externalId("ext-id")
                 .link("https://mylink.com")
                 .userId("usr-id")
+                .username("usrname")
                 .build()
         musicItem
     }

@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS music_items (
     id BIGSERIAL PRIMARY KEY,
     user_id VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     link VARCHAR(255) NOT NULL,
     item_type VARCHAR(255) NOT NULL,
     external_id VARCHAR(255) NOT NULL,

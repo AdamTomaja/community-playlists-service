@@ -18,6 +18,7 @@ public class MusicItemMapper {
     return CreateMusicItemResponse.builder()
         .id(item.getId())
         .userID(item.getUserId())
+        .username(item.getUsername())
         .itemType(item.getItemType())
         .link(item.getLink())
         .externalID(item.getExternalId())

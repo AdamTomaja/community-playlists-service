@@ -16,21 +16,22 @@ public class MusicItemsService {
   private final ItemTypeResolverService itemTypeResolverService;
   private final ExternalIDResolverService externalIDResolverService;
 
-  public MusicItem createItem(String userId, String link) {
+  public MusicItem createItem(String userId, String username, String link) {
     MusicItemType type = itemTypeResolverService.resolve(link);
     String externalID =
         externalIDResolverService
             .resolveExternalID(link, type)
             .orElseThrow(() -> new IllegalArgumentException("Cannot recognize link type"));
-    MusicItem musicItem = createMusicItem(userId, link, type, externalID);
+    MusicItem musicItem = createMusicItem(userId, username, link, type, externalID);
     log.info("Saving new music item: {}", musicItem);
     return musicItemsRepository.save(musicItem);
   }
 
   private MusicItem createMusicItem(
-      String userId, String link, MusicItemType type, String externalID) {
+      String userId, String username, String link, MusicItemType type, String externalID) {
     return MusicItem.builder()
         .userId(userId)
+        .username(username)
         .link(link)
         .itemType(type)
         .externalId(externalID)

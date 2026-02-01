@@ -9,5 +9,7 @@ public class CreateMusicItemRequest {
 
   @NotEmpty private String userID;
 
+  @NotEmpty private String username;
+
   @NotEmpty @URL private String link;
 }

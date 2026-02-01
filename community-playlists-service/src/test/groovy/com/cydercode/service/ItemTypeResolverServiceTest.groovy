@@ -28,5 +28,8 @@ class ItemTypeResolverServiceTest extends Specification {
         "https://open.spotify.com/playlist/62iqkmY2efBloLlTV4gL9y?nd=1&dlsi=9447fe1f39464793" || MusicItemType.SPOTIFY_PLAYLIST
         "https://open.spotify.com/track/3lumjgjP1vWGksXqtxAK8R" || MusicItemType.SPOTIFY_TRACK
         "https://open.spotify.com/album/6di6mCEyCOdexfVNH6T0XY" || MusicItemType.SPOTIFY_ALBUM
+
+        // Unknown
+        "https://some.not.known.website.com" || MusicItemType.UNKNOWN
     }
 }

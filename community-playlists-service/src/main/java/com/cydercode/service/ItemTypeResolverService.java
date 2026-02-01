@@ -73,9 +73,7 @@ public class ItemTypeResolverService {
     for (String param : query.split("&")) {
       String[] parts = param.split("=", 2);
       String key = URLDecoder.decode(parts[0], StandardCharsets.UTF_8);
-      String value = parts.length > 1
-              ? URLDecoder.decode(parts[1], StandardCharsets.UTF_8)
-              : "";
+      String value = parts.length > 1 ? URLDecoder.decode(parts[1], StandardCharsets.UTF_8) : "";
       map.put(key, value);
     }
     return map;

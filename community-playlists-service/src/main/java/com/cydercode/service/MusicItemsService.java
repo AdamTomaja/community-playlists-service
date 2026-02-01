@@ -18,7 +18,10 @@ public class MusicItemsService {
 
   public MusicItem createItem(String userId, String link) {
     MusicItemType type = itemTypeResolverService.resolve(link);
-    String externalID = externalIDResolverService.resolveExternalID(link, type);
+    String externalID =
+        externalIDResolverService
+            .resolveExternalID(link, type)
+            .orElseThrow(() -> new IllegalArgumentException("Cannot recognize link type"));
     MusicItem musicItem = createMusicItem(userId, link, type, externalID);
     log.info("Saving new music item: {}", musicItem);
     return musicItemsRepository.save(musicItem);

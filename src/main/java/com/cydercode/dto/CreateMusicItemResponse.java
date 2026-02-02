@@ -14,4 +14,5 @@ public class CreateMusicItemResponse {
   private MusicItemType itemType;
   private String link;
   private String externalID;
+  private String embedCode;
 }

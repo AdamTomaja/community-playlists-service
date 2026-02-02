@@ -2,14 +2,17 @@ package com.cydercode.mapper
 
 import com.cydercode.model.MusicItem
 import com.cydercode.model.MusicItemType
+import com.cydercode.service.EmbedCodeGeneratorService
 import spock.lang.Specification
 
 class MusicItemMapperTest extends Specification {
 
     def "should map MusicItem to CreateMusicItemResponse"() {
         given:
-        def mapper = new MusicItemMapper()
         MusicItem musicItem = createMusicItem(1)
+        def embedCodeService = Stub(EmbedCodeGeneratorService)
+        embedCodeService.generateEmbedCode(_) >> "embed"
+        def mapper = new MusicItemMapper(embedCodeService)
 
         when:
         def mapped = mapper.toResponse(musicItem)
@@ -21,11 +24,12 @@ class MusicItemMapperTest extends Specification {
         mapped.link == "https://mylink.com"
         mapped.userID == "usr-id"
         mapped.username == "usrname"
+        mapped.embedCode == "embed"
     }
 
     def "should map list of MusicItems to list of CreateMusicItemResponse"() {
         given:
-        def mapper = new MusicItemMapper()
+        def mapper = new MusicItemMapper(Mock(EmbedCodeGeneratorService))
         def items = [
             createMusicItem(1L),
             createMusicItem(2L)

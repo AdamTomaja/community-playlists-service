@@ -8,8 +8,11 @@ import spock.lang.Subject
 
 class MusicItemsServiceTest extends Specification {
 
-    def "should create item from link with resolved type and externalID"() {
+
+
+  def "should create item from link with resolved type and externalID"() {
         given:
+        def link = "https://somelink.com"
         def repository = Stub(MusicItemsRepository)
         def typeResolverService = Stub(ItemTypeResolverService)
         def externalIdResolverService = Stub(ExternalIDResolverService)
@@ -19,14 +22,14 @@ class MusicItemsServiceTest extends Specification {
             return item
         }
 
-        typeResolverService.resolve("the-link") >> MusicItemType.SOUNDCLOUD_PLAYLIST
-        externalIdResolverService.resolveExternalID("the-link", MusicItemType.SOUNDCLOUD_PLAYLIST) >> Optional.of("ext-id")
+        typeResolverService.resolve(link) >> MusicItemType.SOUNDCLOUD_PLAYLIST
+        externalIdResolverService.resolveExternalID(link, MusicItemType.SOUNDCLOUD_PLAYLIST) >> Optional.of("ext-id")
 
         @Subject
                 def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
 
         when:
-        def item = service.createItem("usr-id", "usrname", "the-link")
+        def item = service.createItem("usr-id", "usrname", link)
 
         then:
         item.id == 1L
@@ -34,5 +37,20 @@ class MusicItemsServiceTest extends Specification {
         item.externalId == "ext-id"
         item.userId == "usr-id"
         item.username == "usrname"
+    }
+
+    def "should throw when unknown link type"() {
+        given:
+        def typeResolverService = Stub(ItemTypeResolverService)
+        typeResolverService.resolve(_) >> MusicItemType.UNKNOWN
+
+        @Subject
+        def service = new MusicItemsService(null, typeResolverService, null)
+
+        when:
+        service.createItem("asd", "Asd", "Asd")
+
+        then:
+        thrown(IllegalArgumentException)
     }
 }

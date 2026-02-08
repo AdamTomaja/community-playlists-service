@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS music_items (
     user_id VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     link VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
     item_type VARCHAR(255) NOT NULL,
     external_id VARCHAR(255) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),

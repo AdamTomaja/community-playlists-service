@@ -9,6 +9,7 @@ class YoutubeEmbedGeneratorTest extends Specification {
   static def EXPECTED_TRACK_EMBED = """
 <iframe
 width="100%"
+height="300"
 src="https://www.youtube.com/embed/ext-id"
 title="YouTube video player"
 frameborder="0"
@@ -18,6 +19,7 @@ allowfullscreen></iframe>"""
   static def EXPECTED_PLAYLIST_EMBED = """
 <iframe
 width="100%"
+height="300"
 src="https://www.youtube.com/embed/videoseries?list=ext-id"
 title="YouTube video player" frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -29,7 +29,7 @@ class MusicItemsServiceTest extends Specification {
                 def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
 
         when:
-        def item = service.createItem("usr-id", "usrname", link)
+        def item = service.createItem("usr-id", "usrname", link, "Desc")
 
         then:
         item.id == 1L
@@ -37,6 +37,7 @@ class MusicItemsServiceTest extends Specification {
         item.externalId == "ext-id"
         item.userId == "usr-id"
         item.username == "usrname"
+        item.description == "Desc"
     }
 
     def "should throw when unknown link type"() {
@@ -48,7 +49,7 @@ class MusicItemsServiceTest extends Specification {
         def service = new MusicItemsService(null, typeResolverService, null)
 
         when:
-        service.createItem("asd", "Asd", "Asd")
+        service.createItem("asd", "Asd", "Asd", "Desc")
 
         then:
         thrown(IllegalArgumentException)

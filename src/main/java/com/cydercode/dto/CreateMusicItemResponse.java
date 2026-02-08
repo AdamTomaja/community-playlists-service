@@ -13,6 +13,7 @@ public class CreateMusicItemResponse {
   private String username;
   private MusicItemType itemType;
   private String link;
+  private String description;
   private String externalID;
   private String embedCode;
 }

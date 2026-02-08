@@ -8,11 +8,11 @@ class SoundcloudEmbedGeneratorTest extends Specification {
   static def EXPECTED_EMBED = """
 <iframe
 width="100%"
-height="166"
+height="300"
 scrolling="no"
 frameborder="no"
 allow="autoplay"
-src="https://w.soundcloud.com/player/?url=sc-url&color=%23ff5500">
+src="https://w.soundcloud.com/player/?url=https://soundcloud.com/ext-id&color=%23ff5500">
 </iframe>"""
 
   def "should generate embed for soundcloud items"() {
@@ -34,7 +34,7 @@ src="https://w.soundcloud.com/player/?url=sc-url&color=%23ff5500">
   private MusicItem createItem(MusicItemType type) {
     return MusicItem.builder()
             .itemType(type)
-            .link("sc-url")
+            .externalId("ext-id")
             .build()
   }
 }

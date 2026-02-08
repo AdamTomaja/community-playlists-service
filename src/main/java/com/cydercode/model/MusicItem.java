@@ -30,6 +30,7 @@ public class MusicItem {
   private String userId;
   private String username;
   private String link;
+  private String description;
   private String externalId;
 
   @Enumerated(EnumType.STRING)

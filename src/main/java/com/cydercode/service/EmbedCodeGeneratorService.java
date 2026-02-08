@@ -20,11 +20,11 @@ public class EmbedCodeGeneratorService {
     return switch(musicItem.getItemType()) {
       case MusicItemType.SOUNDCLOUD_PLAYLIST, MusicItemType.SOUNDCLOUD_TRACK ->
               soundcloudEmbedGenerator.generateEmbedCode(musicItem);
-      case MusicItemType.YT_MUSIC_PLAYLIST. YT_MUSIC_TRACK ->
+      case MusicItemType.YT_MUSIC_PLAYLIST, YT_MUSIC_TRACK ->
               youtubeEmbedGenerator.generateEmbedCode(musicItem);
       case MusicItemType.SPOTIFY_ALBUM,  MusicItemType.SPOTIFY_TRACK, SPOTIFY_PLAYLIST ->
               spotifyEmbedGenerator.generateEmbedCode(musicItem);
-      default -> throw new IllegalArgumentException("Invalid music item type");
+      default -> throw new IllegalArgumentException("Invalid music item type: " + musicItem.getItemType());
     };
   }
 }

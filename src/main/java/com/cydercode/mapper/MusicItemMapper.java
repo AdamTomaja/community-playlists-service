@@ -27,6 +27,7 @@ public class MusicItemMapper {
         .username(item.getUsername())
         .itemType(item.getItemType())
         .link(item.getLink())
+        .description(item.getDescription())
         .externalID(item.getExternalId())
         .embedCode(embedCodeGeneratorServicee.generateEmbedCode(item))
         .build();

@@ -36,7 +36,7 @@ public class MusicItemsController {
         request.getUserID());
     return mapper.toResponse(
         musicItemsService.createItem(
-            request.getUserID(), request.getUsername(), request.getLink()));
+            request.getUserID(), request.getUsername(), request.getLink(), request.getDescription()));
   }
 
   @GetMapping()

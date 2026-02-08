@@ -11,17 +11,17 @@ public class SoundcloudEmbedGenerator implements EmbedCodeGenerator {
 
 <iframe
 width="100%"
-height="166"
+height="300"
 scrolling="no"
 frameborder="no"
 allow="autoplay"
-src="https://w.soundcloud.com/player/?url={{ext_id}}&color=%23ff5500">
+src="https://w.soundcloud.com/player/?url=https://soundcloud.com/{{ext_id}}&color=%23ff5500">
 </iframe>""";
 
   @Override
   public String generateEmbedCode(MusicItem item) {
     return switch(item.getItemType()) {
-      case SOUNDCLOUD_TRACK,SOUNDCLOUD_PLAYLIST -> replaceExtId(TEMPLATE, item.getLink());
+      case SOUNDCLOUD_TRACK,SOUNDCLOUD_PLAYLIST -> replaceExtId(TEMPLATE, item.getExternalId());
       default -> throw new IllegalArgumentException("Invalid music item type: " + item.getItemType());
     };
   }

@@ -20,7 +20,10 @@ public class MusicItemsService {
   private final ItemTypeResolverService itemTypeResolverService;
   private final ExternalIDResolverService externalIDResolverService;
 
-  public MusicItem createItem(String userId, String username, String link) {
+  public MusicItem createItem(String userId,
+                              String username,
+                              String link,
+                              String description) {
     MusicItemType type = itemTypeResolverService.resolve(secureLink(link));
     if(type == MusicItemType.UNKNOWN) {
       throw new IllegalArgumentException("Invalid item type: " + link);
@@ -30,7 +33,7 @@ public class MusicItemsService {
         externalIDResolverService
             .resolveExternalID(link, type)
             .orElseThrow(() -> new IllegalArgumentException("Cannot recognize link type"));
-    MusicItem musicItem = createMusicItem(userId, username, link, type, externalID);
+    MusicItem musicItem = createMusicItem(userId, username, link, description, type, externalID);
     log.info("Saving new music item: {}", musicItem);
     return musicItemsRepository.save(musicItem);
   }
@@ -108,11 +111,12 @@ public class MusicItemsService {
   }
 
   private MusicItem createMusicItem(
-      String userId, String username, String link, MusicItemType type, String externalID) {
+      String userId, String username, String link, String description, MusicItemType type, String externalID) {
     return MusicItem.builder()
         .userId(userId)
         .username(username)
         .link(link)
+        .description(description)
         .itemType(type)
         .externalId(externalID)
         .build();

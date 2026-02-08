@@ -54,4 +54,28 @@ class MusicItemsServiceTest extends Specification {
         then:
         thrown(IllegalArgumentException)
     }
+
+  def "should reject potential XSS payload in link field"() {
+    given:
+    def repository = Stub(MusicItemsRepository)
+    def typeResolverService = Stub(ItemTypeResolverService)
+    def externalIdResolverService = Stub(ExternalIDResolverService)
+
+    @Subject
+    def service = new MusicItemsService(repository, typeResolverService, externalIdResolverService)
+
+    when:
+    service.createItem("usr-id", "usrname", maliciousLink, "Desc")
+
+    then:
+    thrown(IllegalArgumentException)
+
+    where:
+    maliciousLink << [
+            "javascript:alert(1)",
+            "data:text/html,<script>alert(1)</script>",
+            "<script>alert(1)</script>",
+            "\"><img src=x onerror=alert(1)>",
+    ]
+  }
 }
